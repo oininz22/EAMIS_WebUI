@@ -1,0 +1,69 @@
+<div class="body container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <h4 mat-dialog-title *ngIf="actionBtn === 'Save' else elseUpdate">Stockroom</h4>
+                <ng-template #elseUpdate>
+                    <h4 mat-dialog-title>Stockroom</h4>
+                </ng-template>
+                <mat-icon mat-dialog-close click>close</mat-icon>
+            </div>
+            <mat-dialog-content>
+                <form [formGroup]="warehouseForm">
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline" [hidden]="true">
+                        <mat-label>Id</mat-label>
+                        <input matInput type="text" formControlName="id">
+                    </mat-form-field>
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <mat-label>Stockroom</mat-label>
+                        <input matInput type="text" formControlName="warehouse_Description" cdkFocusInitial>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <mat-label>Region</mat-label>
+                        <mat-select  (selectionChange)="selectedRegion($event)" formControlName="region_Code" >
+                          <mat-option *ngFor="let items of region" [value]="items.regionCode">
+                            {{items.regionDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <mat-label>Province</mat-label>
+                        <mat-select (selectionChange)="selectedProvince($event)" formControlName="province_Code">
+                          <mat-option *ngFor="let items of province?.items" [value]="items.provinceCode">
+                            {{items.provinceDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <mat-label>City/Municipality</mat-label>
+                        <mat-select (selectionChange)="selectedMunicipality($event)" formControlName="municipality_Code">
+                          <mat-option *ngFor="let items of municipality?.items" [value]="items.cityMunicipalityCode">
+                            {{items.cityMunicipalityDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <mat-label>Barangay/Village</mat-label>
+                        <mat-select (selectionChange)="selectedBarangay($event)" formControlName="barangay_Code" >
+                          <mat-option *ngFor="let items of barangay?.items" [value]="items.brgyCode" >
+                            {{items.brgyDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <mat-label>Street</mat-label>
+                        <input matInput type="text" formControlName="street_Name" cdkFocusInitial>
+                    </mat-form-field>
+                    <div class="d-flex flex-row-reverse button-row">
+                        <button mat-raised-button color="warn" class="button" (click)="clearWarehouse()">
+                            <mat-icon>clear_all</mat-icon>Clear</button>
+                        <button mat-raised-button color="primary" class="button" (click)="addWarehouse()" [disabled]="warehouseForm.invalid">
+                            <mat-icon>check_circle_outline</mat-icon>
+                            {{actionBtn}}
+                            </button>
+                    </div>
+                </form>
+            </mat-dialog-content>
+        </div>
+    </div>
+</div>

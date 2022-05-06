@@ -1,0 +1,55 @@
+<div class="body container">
+    <div class="row">
+        <div class ="col-12">
+            <div class="d-flex justify-content-between">
+                <h4 mat-dialog-title *ngIf="actionBtn === 'Save' else elseUpdate">Attachments</h4>
+                <ng-template #elseUpdate>
+                    <h4 mat-dialog-title>Attachments</h4>
+                </ng-template>
+                <mat-icon mat-dialog-close click>close</mat-icon>
+            </div>
+            <mat-dialog-content>
+                <form [formGroup]="requiredAttachmentForm">
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline" [hidden]="true">
+                        <mat-label>Id</mat-label>
+                        <input matInput type="text" formControlName="id">
+                    </mat-form-field>
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <mat-label>Attachment</mat-label>
+                        <input matInput type="text" formControlName="attachmentDescription" cdkFocusInitial>
+                    </mat-form-field>
+                    <mat-label>Checklist </mat-label>
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <input matInput type="text" formControlName="attachmentTypeDescription" cdkFocusInitial>
+                    </mat-form-field>
+
+                    <div class="form-group">
+                        <div class="bd-highlight p-2">
+                            <div class="button-row">
+                                <button mat-raised-button class="addAttachment" (click)="addAttachmentTypeDescription"
+                                matTooltip="Click to add Attachment">
+                                <mat-icon>add</mat-icon> Attachment Type
+                                </button> 
+                            </div>
+                        </div>
+                        <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <input matInput type="text" formControlName="otherAttachmentTypeDescription" cdkFocusInitial>
+                        </mat-form-field>
+                    </div>
+                    <section class="example-section">
+                        <mat-checkbox class="example-margin" formControlName="is_Required" (change)="check($event)">Required</mat-checkbox>
+                    </section>
+                    <div class="d-flex flex-row-reverse button-row">
+                        <button mat-raised-button color="warn" class="button" (click)="clearRequiredAttachment()">
+                            <mat-icon>clear_all</mat-icon>Clear</button>
+                        <button mat-raised-button color="primary" class="button" (click)="addRequiredAttachment()" [disabled]="requiredAttachmentForm.invalid">
+                            <mat-icon>check_circle_outline</mat-icon>
+                            {{actionBtn}}
+                            </button>
+                    </div>
+                </form>
+            </mat-dialog-content>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<div class = "container pb=5">
+    <mat-toolbar class="my-3">
+        <mat-toolbar-row class="d-flex justify-content-center">
+            <h1>Role Manager</h1>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class ="row">
+        <div class="col-sm-6">Users</div>
+        <div class="col-sm-6">Roles
+            <div class="container">
+                <div class="row d-flex">
+                    <div class="flex-grow-1 p-2">
+                        <form>
+                            <mat-form-field class="full-width">
+                                <mat-label>Search</mat-label>
+                                <input type="text" placeholder="Pre-conditions" matInput>
+                                <mat-icon matSuffix>search</mat-icon>
+                            </mat-form-field>
+                        </form>
+                    </div>
+                    <div class="bd-highlight p-2">
+                        <div class="button-row">
+                            <button mat-raised-button class="add"  (click)="openDialog()"
+                            matTooltip="Click to add Role">
+                            <mat-icon>add</mat-icon> CREATE ROLE
+                            </button>
+                            <!-- <button mat-raised-button class="assign" 
+                            matTooltip="Click to add category">
+                            <mat-icon>add</mat-icon> ASSIGN ROLE
+                            </button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mat-elevation-z8">
+                        <mat-table mat-table [dataSource]="dataSourceRole?.items">
+                            <!--- Note that these columns can be defined in any order.
+                            The actual rendered columns are set as a property on the row definition" -->
+
+                            <!-- No Column -->
+                            <ng-container matColumnDef="no">
+                                <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                                <mat-cell *matCellDef="let element; index as i"> {{i+1}} </mat-cell>
+                            </ng-container>
+                            <!-- Parent Id Column -->
+                            <ng-container matColumnDef="role_Name">
+                                <mat-header-cell *matHeaderCellDef> Role Name </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.role_Name}} </mat-cell>
+                            </ng-container>
+                            <!-- Description Column -->
+                            <ng-container matColumnDef="isDeleted">
+                                <mat-header-cell *matHeaderCellDef> Deleted </mat-header-cell>
+                                <mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.isDeleted" [disabled]="true"></mat-checkbox></mat-cell>
+                                <!-- <mat-cell *matCellDef="let element"> {{element.isDeleted}} </mat-cell> -->
+                            </ng-container>
+                            <!-- Actions Column -->
+                            <ng-container matColumnDef="actions">
+                                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                <button mat-icon-button (click)="editRoleManager(element)" 
+                                    matTooltip="Click to edit this data">
+                                    <mat-icon class="edit-icon">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button (click)="deleteRoleManager(element)"
+                                    matTooltip="Click to delete this data">
+                                    <mat-icon class="delete-icon">delete</mat-icon>
+                                </button>
+                                </mat-cell>
+                            </ng-container>
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                        <mat-paginator  [length]="dataSourceRole?.count"
+                                    [pageSizeOptions]="[5, 10, 20]"
+                                    (page)="pageEvent = $event; onPaginateChangeRole($event)"
+                                    showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

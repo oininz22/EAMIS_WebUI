@@ -1,0 +1,31 @@
+  <div class="bg">
+    <img src="../../assets/DENR-Masthead_2018a.jpg" class="img-fluid" alt="Responsive image">
+    <div class="container">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-8 col-md-8 col-lg-6 col-xl-5">
+          <mat-card class="card">
+            <h2 class="text-uppercase text-center">ENHANCED ASSET MANAGEMENT SYSTEM</h2> 
+            <mat-card-content class=" text-center">
+              <form  [formGroup]="LoginForm" class="py-3">
+                <mat-form-field class="example-full-width mb-3" appearance="fill" [hideRequiredMarker]="true">
+                  <mat-label>Username</mat-label>
+                  <input type="username" matInput [formControl]="username" required>
+                  <mat-icon matSuffix>person</mat-icon>
+                  <mat-error *ngIf="usernameFormControl.invalid">{{getUsernameErrorMessage()}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width mb-3" appearance="fill" [hideRequiredMarker]="true">
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="hide ? 'password':'text'"  [formControl]="password" required>
+                  <i class="material-icons" matSuffix (click)="hide = !hide">{{hide ? 'visibility':'visibility_off'}}</i>
+                  <mat-error *ngIf="passwordFormControl.invalid">{{getPasswordErrorMessage()}}</mat-error>
+                </mat-form-field>
+        
+            <button mat-button type="submit" class="btn btn-lg btn-block btn-primary px-5" (click)="OnSubmit()">Login</button>
+            </form> 
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>

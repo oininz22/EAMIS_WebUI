@@ -1,0 +1,67 @@
+<div class = "container-fluid pb=5">
+    <mat-toolbar>
+        <mat-toolbar-row class="d-flex justify-content-center">
+            <h1>Unit of Measure</h1>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="container-fluid">
+        <div class="row d-flex">
+            <div class="flex-grow-1 p-2">
+                <form>
+                    <mat-form-field class="full-width">
+                        <mat-label>Search</mat-label>
+                        <input type="text" placeholder="Unit of Measure" matInput>
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="bd-highlight p-2">
+                <div class="button-row">
+                    <button mat-raised-button class="add" (click)="openDialog()"
+                    matTooltip="Click to add category">
+                    <mat-icon>add</mat-icon> CREATE
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="mat-elevation-z8">
+                <mat-table mat-table [dataSource]="dataSource?.items">
+                    <ng-container matColumnDef="uomshortDesc">
+                        <mat-header-cell *matHeaderCellDef> UOM Short Description </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.short_Description}} </mat-cell>
+                    </ng-container>
+                    <!-- Unit of Measure Column -->
+                    <ng-container matColumnDef="uomDescription">
+                        <mat-header-cell *matHeaderCellDef> UOM Description </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.uom_Description}} </mat-cell>
+                    </ng-container>
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          <button mat-icon-button (click)="editUnitMeasure(element)" 
+                            matTooltip="Click to edit this data">
+                            <mat-icon class="edit-icon">edit</mat-icon>
+                          </button>
+                          <button mat-icon-button (click)="deleteUnitMeasure(element)"
+                            matTooltip="Click to delete this data">
+                            <mat-icon class="delete-icon">delete</mat-icon>
+                          </button>
+                        </mat-cell>
+                      </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator  [length]="dataSource?.count"
+                            [pageSizeOptions]="[5, 10, 20]"
+                            (page)="pageEvent = $event; onPaginateChange($event)"
+                            showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div class = "container pb=5">
+    <mat-toolbar class="my-3">
+        <mat-toolbar-row class="d-flex justify-content-center">
+            <h1>Attachments</h1>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="container">
+        <div class="row d-flex">
+            <div class="flex-grow-1 p-2">
+                <form>
+                    <mat-form-field class="full-width">
+                        <mat-label>Search</mat-label>
+                        <input type="text" placeholder="Attachment" matInput>
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="bd-highlight p-2">
+                <div class="button-row">
+                    <button mat-raised-button class="add" (click)="openDialog()"
+                    matTooltip="Click to add Attachment">
+                    <mat-icon>add</mat-icon> CREATE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="mat-elevation-z8">
+                <mat-table mat-table [dataSource]="dataSource?.items">
+                    <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->        
+                    <!-- Description Column -->
+                    <ng-container matColumnDef="Type">
+                        <mat-header-cell *matHeaderCellDef>Attachment Type </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.attachmentDescription}} </mat-cell>
+                    </ng-container>               
+                    <ng-container matColumnDef="isRequired">
+                        <mat-header-cell *matHeaderCellDef> Required </mat-header-cell>
+                        <mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.is_Required" [disabled]="true" ></mat-checkbox></mat-cell>
+                    </ng-container>
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          <button mat-icon-button (click)="editRequiredAttachment(element)" 
+                            matTooltip="Click to edit this data">
+                            <mat-icon class="edit-icon">edit</mat-icon>
+                          </button>
+                          <button mat-icon-button (click)="deleteRequiredAttachment(element)"
+                            matTooltip="Click to delete this data">
+                            <mat-icon class="delete-icon">delete</mat-icon>
+                          </button>
+                        </mat-cell>
+                      </ng-container>
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator  [length]="dataSource?.count"
+                            [pageSizeOptions]="[5, 10, 20]"
+                            (page)="pageEvent = $event; onPaginateChange($event)"
+                            showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

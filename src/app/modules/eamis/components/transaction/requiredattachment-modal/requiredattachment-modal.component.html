@@ -1,0 +1,67 @@
+<div class="body container">
+    <div class="row">
+        <div class="col-12">
+         <div class="d-flex justify-content-between">
+        <h4 mat-dialog-title>Required Attachments List</h4>
+            <ng-template #elseUpdate>
+                <h4 mat-dialog-title>Required Attachments List</h4>
+            </ng-template>
+            <mat-icon mat-dialog-close click>close</mat-icon>
+        </div>
+    
+        <mat-dialog-content>
+            <mat-table mat-table [dataSource]="dataSource?.items">
+                <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+    
+                <!-- No Column -->
+                <ng-container matColumnDef="ischeck">
+              <section>
+                  <a *matHeaderCellDef></a>
+                  <mat-checkbox [checked] (change)="selectedItem(element.id,$event)" *matCellDef="let element"></mat-checkbox>
+              </section>
+                </ng-container>
+
+                <ng-container matColumnDef="no">
+                  <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+                </ng-container>
+    
+                <!-- Description Column -->
+                <ng-container matColumnDef="description">
+                  <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.document_Description}} </mat-cell>
+                </ng-container>
+    
+                <!-- Actions Column -->
+                <ng-container matColumnDef="isrequired">
+                  <mat-header-cell *matHeaderCellDef> IsRequired </mat-header-cell>
+                  <mat-cell *matCellDef="let element" #isAllChecked>
+                    <section>
+                      <mat-checkbox [disabled]="true" [(ngModel)]="element.is_Required" class="example-margin"></mat-checkbox>
+                    </section>
+                  </mat-cell>
+                </ng-container>
+    
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+              
+    </mat-dialog-content>
+    <mat-paginator  [length]="dataSource?.count"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="pageEvent = $event; onPaginateChange($event)"
+    showFirstLastButtons>
+  </mat-paginator>
+
+
+    <div class="d-flex justify-content-end">
+      <div class="button-row">
+          <button mat-flat-button class="add" color="primary" [disabled]="!isAllChecked" (click)="onSubmit();"> Save
+             <mat-icon>check_circle_outline</mat-icon>
+          </button>
+      </div>
+  </div>
+        </div>
+    </div>
+</div>

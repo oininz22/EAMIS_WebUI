@@ -1,0 +1,126 @@
+<div class="body container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <div></div>
+                <h4 mat-dialog-title *ngIf="actionBtn === 'Save' else elseUpdate">Item Category</h4>
+                <ng-template #elseUpdate>
+                    <h4 mat-dialog-title>Item Category</h4>
+                </ng-template>
+                <mat-icon mat-dialog-close click>close</mat-icon>
+            </div>
+    
+            <mat-dialog-content>
+                <form [formGroup]="itemCategoryForm">
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline" [hidden]="true">
+                        <mat-label>Id</mat-label>
+                        <input matInput type="text" formControlName="id">
+                    </mat-form-field>
+                            <div class="d-flex justify-content-center">
+                                <section>
+                                    <mat-checkbox class="example-margin" formControlName="isSupplies" color="primary" (change)="checkedSupplies($event)">Supplies</mat-checkbox>
+                                    &nbsp;
+                                    <mat-checkbox class="example-margin" formControlName="isAsset" color="primary" (change)="checkedAsset($event)">Asset</mat-checkbox>
+                                    &nbsp;
+                                    <mat-checkbox class="example-margin" formControlName="isSerialized" color="primary" (change)="checkSerialized($event)" >Serialized</mat-checkbox>
+                                    &nbsp;
+                                    <mat-checkbox class="example-margin" formControlName="isStockable" color="primary" (change)="checkStockable($event)">Stockable</mat-checkbox>
+                                    &nbsp;
+                                    <mat-checkbox class="example-margin" formControlName="isActive" color="primary" (change)="checkActive($event)">Active</mat-checkbox>
+                                </section>
+                            </div>
+                            <mat-form-field class="full-width">
+                                <mat-label>Short Description</mat-label>
+                                <input matInput type="text" formControlName="shortDesc" cdkFocusInitial>
+                                <mat-error *ngIf="itemCategoryForm.invalid">{{getShortDescErrorMsg()}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="full-width">
+                                <mat-label>Category Name</mat-label>
+                                <input matInput type="text" formControlName="categoryName" >
+                                <mat-error *ngIf="itemCategoryForm.invalid">{{getCategoryNameErrorMsg()}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="full-width">
+                                <mat-label>Account Code</mat-label>
+                                <mat-select formControlName="chartOfAccountId">
+                                  <mat-option *ngFor="let items of chartOfAccounts" [value]="items.id">
+                                    {{items.accountCode + ', ' + items.objectCode}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="itemCategoryForm.invalid">{{getAccountCodeErrorMsg()}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="full-width">
+                                <mat-label>Cost Method</mat-label>
+                                <mat-select formControlName="costMethod">
+                                  <mat-option *ngFor="let items of cost" [value]="items.costMethodName">
+                                    {{items.costMethodName}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="itemCategoryForm.invalid">{{getCostMethodErrorMsg()}}</mat-error>
+                            </mat-form-field>
+                            <div *ngIf="supplies == true else etc">
+                                <div class="row" [hidden]="true">
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Estimate Life (months)</mat-label>
+                                            <input matInput type="number" formControlName="estimatedLife" >
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Depreciation Method</mat-label>
+                                            <input matInput type="text" formControlName="depreciationMethod"  [readonly]="true">
+                                        </mat-form-field>
+                                    
+                                        <!-- <mat-form-field class="full-width">
+                                            <mat-label>Responsibility Code</mat-label>
+                                            <mat-select formControlName="officeId">
+                                            <mat-option *ngFor="let items of aisOffice" [value]="items.id">
+                                                {{items.shortName}}
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-template #etc>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Estimate Life (months)</mat-label>
+                                            <input matInput type="number" formControlName="estimatedLife" >
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6">
+                                        <mat-form-field class="full-width">
+                                            <mat-label>Depreciation Method</mat-label>
+                                            <input matInput formControlName="depreciationMethod"  [readonly]="true">
+                                        </mat-form-field>
+                                    
+                                        <!-- <mat-form-field class="full-width">
+                                            <mat-label>Responsibility Code</mat-label>
+                                            <mat-select formControlName="officeId">
+                                            <mat-option *ngFor="let items of aisOffice" [value]="items.id">
+                                                {{items.shortName}}
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field> -->
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                    <div class="d-flex justify-content-center button-row">
+                        <button mat-raised-button color="primary" class="button" (click)="addItemCategory()" [disabled]="itemCategoryForm.invalid">
+                            <mat-icon>check_circle_outline</mat-icon>
+                            {{actionBtn}}
+                        </button>
+                        <button mat-raised-button color="warn" class="button" (click)="clearItemCategory()">
+                            <mat-icon>clear_all</mat-icon>Clear</button>
+                    </div>
+                </form>
+            </mat-dialog-content>
+        </div>
+    </div>
+</div>
+
+
+

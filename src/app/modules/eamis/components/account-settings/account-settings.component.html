@@ -1,0 +1,60 @@
+ <div class="container-fluid py-2">
+   <div class="row">
+     <div class="col-12">
+       <mat-card class="card">
+         <mat-toolbar>
+          <mat-toolbar-row class="d-flex justify-content-center">
+            <h3>User Info</h3>
+          </mat-toolbar-row>
+        </mat-toolbar>
+        <div class="container px-5 py-5">
+          <div class="row">
+            <div class="col-12">
+                <div class="row">
+                  <div class="col-6">
+                    <mat-form-field class="full-width">
+                      <mat-label>Last Name</mat-label>
+                      <input matInput  type="text" [readonly]="true" ngModel="{{dataSource.lastName}}">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                      <mat-label>First Name</mat-label>
+                      <input matInput type="text" [readonly]="true" ngModel="{{dataSource.firstName}}">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                      <mat-label>Middle Name</mat-label>
+                      <input matInput type="text" [readonly]="true" ngModel="{{dataSource.middleName}}">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                      <mat-label>Extension Name</mat-label>
+                      <input matInput type="text" [readonly]="true" ngModel="{{dataSource.extensionName}}">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-6">
+                    <mat-form-field class="full-width">
+                      <mat-label>Nickname</mat-label>
+                      <input matInput type="text" [readonly]="true" ngModel="{{dataSource.nickName}}">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                      <mat-label>Gender</mat-label>
+                      <input matInput type="text" [readonly]="true" ngModel="{{dataSource.codeValue.name}}">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                      <mat-label>Office</mat-label>
+                      <input matInput type="text" [readonly]="true" ngModel="{{dataSource.officeId}}">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                      <mat-label>Current Position</mat-label>
+                      <input matInput type="text" [readonly]="true">
+                    </mat-form-field>
+                  </div>
+                </div>
+            </div>
+              <div class="button-row">
+                <button mat-flat-button class="changePass" color="primary"> CHANGE PASSWORD</button>
+              </div>
+          </div>
+        </div>
+       </mat-card>
+     </div>
+   </div>
+ </div>

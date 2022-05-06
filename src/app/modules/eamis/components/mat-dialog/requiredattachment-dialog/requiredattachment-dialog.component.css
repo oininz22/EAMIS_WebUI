@@ -1,0 +1,40 @@
+.body{
+    width: 400px;
+    padding: 0px;
+}
+
+.button{
+    width: 100px;
+}
+
+.button-row .mat-button-base{
+    margin: 6px 6px 6px 0;
+}
+.full-width{
+    width: 100%;
+}
+
+.foo .mat-dialog-container  {
+    padding: 0px !important;
+  }
+
+  .mat-dialog-container .body{
+    padding: 0px !important;
+  }
+
+  .example-section {
+    margin: 12px 0;
+  }
+  
+  .example-margin {
+    margin: 0 12px;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin-top: 4px;
+  }
+  .addAttachment{
+    background-color: #fca130;
+    color: #fff;
+}

@@ -1,0 +1,111 @@
+<div class="body container">
+    <div class="row">
+        <div class="col-12">
+          <div class="d-flex justify-content-between">
+            <div></div>
+            <h4 mat-dialog-title *ngIf="actionBtn === 'Save' else elseUpdate">Supplier</h4>
+            <ng-template #elseUpdate>
+              <h4>Supplier</h4>
+            </ng-template>
+            <mat-icon  mat-dialog-close click>close</mat-icon>
+          </div>
+    
+            <mat-dialog-content>
+                <form [formGroup]="supplierForm">
+                  <div class="row">
+                    <div class="col-6">
+                      <mat-form-field class="full-width" floatLabel="always" appearance="outline" [hidden]="true">
+                          <mat-label>Id</mat-label>
+                          <input matInput type="text" formControlName="id">
+                      </mat-form-field>
+                      <mat-form-field class="full-width">
+                          <mat-label>Company Name</mat-label>
+                          <input matInput type="text" formControlName="companyName" cdkFocusInitial>
+                      </mat-form-field>
+                      <mat-form-field class="full-width">
+                          <mat-label>Region</mat-label>
+                          <mat-select (selectionChange)="selectedRegion($event)" formControlName="regionCode">
+                            <mat-option *ngFor="let items of region" [value]="items.regionCode">
+                              {{items.regionDescription}}
+                            </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                        <mat-form-field class="full-width">
+                          <mat-label>Province</mat-label>
+                          <mat-select (selectionChange)="selectedProvince($event)" formControlName="provinceCode">
+                            <mat-option *ngFor="let items of province" [value]="items.provinceCode">
+                              {{items.provinceDescription}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                          <mat-label>City/Municipality</mat-label>
+                          <mat-select (selectionChange)="selectedMunicipality($event)" formControlName="cityMunicipalityCode">
+                            <mat-option *ngFor="let items of municipality" [value]="items.cityMunicipalityCode">
+                              {{items.cityMunicipalityDescription}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                          <mat-label>Barangay/Village</mat-label>
+                          <mat-select (selectionChange)="selectedBarangay($event)" formControlName="brgyCode">
+                            <mat-option *ngFor="let items of barangay" [value]="items.brgyCode">
+                              {{items.brgyDescription}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                          <mat-label>Street</mat-label>
+                          <input matInput type="text" formControlName="street" formControlName="street">
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                          <mat-label>Company Description</mat-label>
+                          <input matInput type="text" formControlName="companyDescription">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="full-width">
+                          <mat-label>Contact Person</mat-label>
+                          <input matInput type="text" formControlName="contactPersonName">
+                      </mat-form-field>
+                      <mat-form-field class="full-width">
+                        <mat-label>Contact Number</mat-label>
+                        <input matInput type="tel" formControlName="contactPersonNumber" placeholder="09xx xxx xxxx" mask="0000 000 0000">
+                      </mat-form-field>
+                      <mat-form-field class="full-width">
+                        <mat-label>Bank</mat-label>
+                        <input matInput type="text" formControlName="bank">
+                      </mat-form-field>
+                      <mat-form-field class="full-width">
+                        <mat-label>Account Name</mat-label>
+                        <input matInput type="text" formControlName="accountName">
+                      </mat-form-field>
+                      <mat-form-field class="full-width">
+                        <mat-label>Account Number</mat-label>
+                        <input matInput type="text" formControlName="accountNumber">
+                      </mat-form-field>
+                      <mat-form-field class="full-width">
+                        <mat-label>Branch</mat-label>
+                        <input matInput type="text" formControlName="branch">
+                      </mat-form-field>
+                      <section>
+                        <mat-checkbox class="example-margin" formControlName="isActive" color="primary" (change)="checkSupplier($event)">Active</mat-checkbox>
+                      </section>
+                    </div>
+                  </div>
+                      <div class="d-flex justify-content-center button-row">
+                        <button mat-raised-button color="primary" class="button" (click)="addSupplier()" [disabled]="supplierForm.invalid">
+                          <mat-icon>check_circle_outline</mat-icon>
+                          {{actionBtn}}
+                        </button>
+                        <button mat-raised-button color="warn" class="button" (click)="clearSupplier()">
+                          <mat-icon>clear_all</mat-icon>Clear</button>
+                      </div>
+                </form>
+            </mat-dialog-content>
+        </div>
+    </div>
+</div>
+
+
+

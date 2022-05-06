@@ -1,0 +1,88 @@
+<div class="main">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <button mat-icon-button>
+                <mat-icon  (click)="sidenav.toggle();">menu</mat-icon>
+            </button>
+            <h1>Enhanced Asset Management Information System</h1>
+            <span class="toolbar-spacer"></span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-sidenav-container>
+        <mat-sidenav #sidenav opened mode="side" position="start">
+            <mat-nav-list>
+                <img src="../../../../../assets/denr-logo.png" class="img-fluid" alt="Responsive image">
+            <a>{{Nickname}}</a>
+                <button mat-button [matMenuTriggerFor]="menu">{{Fullname}}<mat-icon>keyboard_arrow_down</mat-icon></button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item routerLink="accountsettings"><mat-icon class="dp-black">settings</mat-icon>User Info</button>
+                    <button mat-menu-item (click)="Logout()"><mat-icon class="dp-black">keyboard_backspace</mat-icon>Logout</button>
+                </mat-menu>
+            <mat-divider class="mt-5"></mat-divider>
+            
+            <a mat-list-item [routerLink]="['/admin/dashboard']" [routerLinkActive]="['active']" 
+            [routerLinkActiveOptions]="{exact: true}"> <mat-icon>dashboard</mat-icon>Dashboard</a>
+            <!-- <a mat-list-item [routerLinkActive]="['active']">
+                <mat-icon>account_circle</mat-icon>
+                <mat-label>User&nbsp;Manager</mat-label>
+                <mat-select>
+                    <mat-option (click)="openDialog()">User Registration</mat-option>
+                    <mat-option [routerLink]="['masterfile/supplier']">User List</mat-option>
+                </mat-select>
+            </a> -->
+            <a mat-list-item [routerLinkActive]="['active']" [routerLink]="['user-list']">
+                <mat-icon>account_circle</mat-icon>
+                <mat-label>User Management</mat-label>
+            </a>
+            <a mat-list-item [routerLinkActive]="['active']" [routerLink]="['role-manager']">
+                <mat-icon>manage_accounts</mat-icon>
+                <mat-label>Role Management</mat-label>
+            </a>
+            <!-- <a mat-list-item [routerLinkActive]="['active']">
+                <mat-icon>manage_accounts</mat-icon>
+                <mat-label>Role&nbsp;Management</mat-label>
+                <mat-select>
+                    <mat-option [routerLink]="['masterfile/assetclass']">Role Assignment</mat-option>
+                    <mat-option [routerLink]="['role-manager']">Role List</mat-option>
+                </mat-select>
+            </a> -->
+
+            <a mat-list-item [routerLinkActive]="['active']" *appHasRole="[]">
+                <mat-icon>folder</mat-icon>
+                <mat-label>Masterfile</mat-label>
+                <mat-select>
+                    <mat-option [routerLink]="['masterfile/chart-of-accounts']">Chart of Accounts</mat-option>
+                    <mat-option [routerLink]="['masterfile/funds']">Funds</mat-option>
+                    <mat-option [routerLink]="['masterfile/item-category']">Item Category</mat-option>
+                    <mat-option [routerLink]="['masterfile/item-sub-category']">Item Sub Category</mat-option>
+                    <mat-option [routerLink]="['masterfile/property-items']">Items</mat-option>
+                    <mat-option [routerLink]="['masterfile/procurement-category']">Procurement Category</mat-option>
+                    <mat-option [routerLink]="['masterfile/pre-conditions']">Pre-Conditions</mat-option>
+                    <mat-option [routerLink]="['masterfile/required-attachment']">Attachments</mat-option>
+                    <mat-option [routerLink]="['masterfile/supplier']">Supplier</mat-option>
+                    <mat-option [routerLink]="['masterfile/unit-of-measure']">Unit of Measurement</mat-option>
+                    <mat-option [routerLink]="['masterfile/stockroom']">Stockroom</mat-option>
+                    <mat-option [routerLink]="['masterfile/chart-of-accounts']">Chart of Accounts</mat-option>
+                    
+                    <!-- <mat-option [routerLink]="['masterfile/test-component']">Test  Component</mat-option> -->
+                </mat-select>
+            </a>
+            <a mat-list-item [routerLinkActive]="['active']">
+            <mat-icon>transform</mat-icon>
+            <mat-label>Transaction</mat-label>
+            <mat-select>
+                <mat-option [routerLink]="['transaction/received-property']">Receive Property</mat-option>
+                <mat-option [routerLink]="['transaction/delivery-receipt']">Delivery Receipt</mat-option>
+            </mat-select>
+            </a>
+            <a mat-list-item [routerLink]="['#']" [routerLinkActive]="['active']">
+                <mat-icon>file_copy</mat-icon>Reports</a>
+            
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="main-content pb-5">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,123 @@
+<div class="body container">
+    <div class="row">
+        <div class="col-12">
+         <div class="d-flex justify-content-between">
+             <div></div>
+            <h4 mat-dialog-title *ngIf="actionBtn === 'Save' else elseUpdate">Property Items</h4>
+            <ng-template #elseUpdate>
+                <h4 mat-dialog-title>Property Items</h4>
+            </ng-template>
+            <mat-icon mat-dialog-close click>close</mat-icon>
+        </div>
+    
+        <mat-dialog-content>
+            <form [formGroup]="propertyForm">
+                <mat-form-field class="full-width" floatLabel="always" appearance="outline" [hidden]="true">
+                    <mat-label>Id</mat-label>
+                    <input matInput type="text" formControlName="id">
+                </mat-form-field>
+                <div class="d-flex justify-content-center">
+                    <section>
+                        <mat-checkbox class="example-margin" formControlName="isActive" color="primary" (change)="checkActive($event)" >Active</mat-checkbox>
+                    </section>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="full-width">
+                            <mat-label>Item #</mat-label>
+                            <input matInput type="text" formControlName="propertyNo">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="full-width">
+                            <mat-label>APP #</mat-label>
+                            <input matInput type="text" formControlName="appNo">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-form-field class="full-width">
+                    <mat-label>Item Name</mat-label>
+                    <input matInput type="text" formControlName="propertyName">
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <mat-label>Category</mat-label>
+                    <mat-select (selectionChange)="selectedCategory($event)" formControlName="categoryId">
+                      <mat-option *ngFor="let items of category" [value]="items.id">
+                        {{items.shortDesc+' '+items.categoryName}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="full-width">
+                            <mat-label>Subcategory</mat-label>
+                            <mat-select formControlName="subCategoryId">
+                              <mat-option *ngFor="let items of subCategory" [value]="items.id">
+                                {{items.subCategoryName}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>Brand</mat-label>
+                            <input matInput type="text" formControlName="brand">
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>Unit of measure</mat-label>
+                            <mat-select formControlName="uomId">
+                              <mat-option *ngFor="let items of uom" [value]="items.id">
+                                {{items.uom_Description}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>Warehouse</mat-label>
+                            <mat-select formControlName="warehouseId">
+                              <mat-option *ngFor="let items of warehouse" [value]="items.id">
+                                {{items.warehouse_Description}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="full-width">
+                            <mat-label>Item type</mat-label>
+                            <mat-select formControlName="propertyType">
+                              <mat-option *ngFor="let items of property" [value]="items.propertyTypeName">
+                                {{items.propertyTypeName}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>Model</mat-label>
+                            <input matInput type="text" formControlName="model">
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>QTY in stock</mat-label>
+                            <input matInput type="number" formControlName="quantity">
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-label>Supplier</mat-label>
+                            <mat-select formControlName="supplierId">
+                              <mat-option *ngFor="let items of supplier" [value]="items.id">
+                                {{items.companyName}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center button-row">
+                    <button mat-raised-button color="primary" class="button" (click)="addProperty()" [disabled]="propertyForm.invalid">
+                        <mat-icon>check_circle_outline</mat-icon>
+                        {{actionBtn}}
+                        </button>
+                    <button mat-raised-button color="warn" class="button" (click)="clearProperty()">
+                        <mat-icon>clear_all</mat-icon>Clear</button>
+                </div>
+            </form>
+        </mat-dialog-content>
+        </div>
+    </div>
+</div>
+
+
+

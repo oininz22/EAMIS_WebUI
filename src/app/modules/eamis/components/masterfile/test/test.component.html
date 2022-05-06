@@ -1,0 +1,36 @@
+<form [formGroup]="itemSubCategoryForm">
+  <mat-form-field class="full-width" floatLabel="always" appearance="outline" [hidden]="true">
+      <mat-label>Id</mat-label>
+      <input matInput type="text" formControlName="id">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+      <mat-label>Category Name</mat-label>
+      <mat-select  (selectionChange)="selectedCategory($event)" formControlName="categoryId" >
+        <mat-option *ngFor="let items of categoryItem" [value]="items.id">
+          {{items.categoryName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  <mat-form-field class="full-width">
+      <mat-label>Sub Category Name</mat-label>
+      <input matInput type="text" formControlName="subCategoryName">
+  </mat-form-field>
+  <div *ngFor="let item of values; let i = index">
+    <input type="text" [(ngModel)]="item.value" #name="ngModel" name="item{{i}}" formControlName="subCategoryName">
+    <button (click)="removevalue(i)">Remove</button>
+  </div>
+  <button (click)="addvalue()">ADD</button>
+  <h2>result</h2>
+  <div *ngFor="let item of values;">
+    {{item.value}}
+  </div>
+  
+  <div class="d-flex flex-row-reverse button-row">
+      <button mat-raised-button color="primary" class="button" (click)="addItemSubCategory()" [disabled]="itemSubCategoryForm.invalid">
+          <mat-icon>check_circle_outline</mat-icon>
+          {{actionBtn}}
+          </button>
+  </div>
+</form>
+
+

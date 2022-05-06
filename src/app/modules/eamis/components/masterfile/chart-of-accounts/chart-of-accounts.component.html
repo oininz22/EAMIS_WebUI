@@ -1,0 +1,92 @@
+<div class = "container-fluid pb=5">
+    <mat-toolbar>
+        <mat-toolbar-row class="d-flex justify-content-center">
+            <h1>Chart of Accounts</h1>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="container-fluid">
+        <div class="row d-flex">
+            <div class="flex-grow-1 p-2">
+                <form>
+                    <mat-form-field class="full-width">
+                        <mat-label>Search</mat-label>
+                        <input type="text" placeholder="Chart of Accounts" matInput>
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="bd-highlight p-2">
+                <div class="button-row">
+                    <button mat-raised-button class="add" (click)="openDialog()"
+                    matTooltip="Click to add category">
+                    <mat-icon>add</mat-icon> CREATE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="mat-elevation-z8">
+                <mat-table mat-table [dataSource]="dataSource">
+                    <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+                    <!-- No Column -->
+                    <!-- <ng-container matColumnDef="no">
+                        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                        <mat-cell *matCellDef="let element; index as i"> {{i+1}} </mat-cell>
+                    </ng-container> -->
+                    <ng-container matColumnDef="classification">
+                        <mat-header-cell *matHeaderCellDef > Classification </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.groupClassificationDTO.classificationDTO.nameClassification}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="subClassification">
+                        <mat-header-cell *matHeaderCellDef > Sub-Classification </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.groupClassificationDTO.subClassificationDTO.nameSubClassification}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="group">
+                        <mat-header-cell *matHeaderCellDef > Group </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.groupClassificationDTO.nameGroupClassification}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="object_Code">
+                        <mat-header-cell *matHeaderCellDef > Object Code </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.objectCode}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="account_Code">
+                        <mat-header-cell *matHeaderCellDef > UACS </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.accountCode}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="is_Active">
+                        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                        <mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.isActive" [disabled]="true" ></mat-checkbox></mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="is_InventoryItem">
+                        <mat-header-cell *matHeaderCellDef> Inventory Item </mat-header-cell>
+                        <mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.isPartofInventroy" [disabled]="true" ></mat-checkbox></mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          <button mat-icon-button (click)="editChartofAccounts(element)" 
+                            matTooltip="Click to edit this data">
+                            <mat-icon class="edit-icon">edit</mat-icon>
+                          </button>
+                          <!-- <button mat-icon-button (click)="deleteChartofAccounts(element)"
+                            matTooltip="Click to delete this data">
+                            <mat-icon class="delete-icon">delete</mat-icon>
+                          </button> -->
+                        </mat-cell>
+                      </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator  [length]="objectChart?.count"
+                            [pageSizeOptions]="[5, 10, 20]"
+                            (page)="pageEvent = $event; onPaginateChange($event)"
+                            showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

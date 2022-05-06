@@ -1,0 +1,141 @@
+<div class="container-fluid pb-5">
+    <mat-toolbar  class="my-3">
+      <mat-toolbar-row class="d-flex justify-content-center">
+      <h1>Item Category</h1>  
+      </mat-toolbar-row>
+    </mat-toolbar>
+      <div class="container-fluid">
+        <div class="row d-flex">
+          <div class="flex-grow-1 p-2">
+            <form>
+              <mat-form-field class="full-width">
+                <mat-label>Search</mat-label>
+                <input type="text" placeholder="Item Category" matInput [formControl]="searchControl"
+                [matAutocomplete]="auto" (input)="valueChange()">
+                <mat-icon matSuffix>search</mat-icon>
+                <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of dataSource | async" [value]="option">
+                    {{option.categoryName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+          </div>
+          <div class="bd-highlight p-2">
+            <div class="button-row ">
+              <button mat-raised-button class="add" (click)="openDialog()"
+                matTooltip="Click to add item category">
+                <mat-icon>add</mat-icon> CREATE
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="mat-elevation-z8">
+            <mat-table [dataSource]="itemCategory">
+                <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+  
+                <!-- No Column -->
+                <!-- <ng-container matColumnDef="no">
+                  <mat-header-cell [ngClass]="'w-75'" *matHeaderCellDef> No. </mat-header-cell>
+                  <mat-cell [ngClass]="'w-75'" *matCellDef="let element; index as i"> {{i+1}} </mat-cell>
+                </ng-container> -->
+  
+                <!-- Description Column -->
+                <ng-container matColumnDef="shortDescription">
+                  <mat-header-cell *matHeaderCellDef>Short Description</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.shortDesc}}</mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="categoryName">
+                  <mat-header-cell *matHeaderCellDef > Category Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.categoryName}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="accountCode">
+                    <mat-header-cell *matHeaderCellDef> Account Code </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.chartOfAccounts.accountCode+' '+element.chartOfAccounts.objectCode}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="costMethod">
+                    <mat-header-cell *matHeaderCellDef> Cost Method </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.costMethod}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="depreciationMethod">
+                    <mat-header-cell  *matHeaderCellDef> Depreciation Method </mat-header-cell>
+                    <mat-cell  *matCellDef="let element"> {{element.depreciationMethod}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="estimatedLife">
+                  <mat-header-cell *matHeaderCellDef> Estimated Life (months) </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.estimatedLife}} </mat-cell>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="responsibilityCode">
+                  <mat-header-cell *matHeaderCellDef> Responsibility Code </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.officeInfo.shortName}} </mat-cell>
+                </ng-container> -->
+                <ng-container matColumnDef="isSupplies">
+                  <mat-header-cell *matHeaderCellDef> Supplies </mat-header-cell>
+                  <mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.isSupplies" [disabled]="true" ></mat-checkbox></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="isAsset">
+                  <mat-header-cell *matHeaderCellDef> Asset </mat-header-cell>
+                  <mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.isAsset" [disabled]="true" ></mat-checkbox></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="isSerialized">
+                  <mat-header-cell *matHeaderCellDef> Serialized </mat-header-cell>
+                  <mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.isSerialized" [disabled]="true" ></mat-checkbox></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="isStockable">
+                  <mat-header-cell *matHeaderCellDef> Stockable </mat-header-cell>
+                  <mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.isStockable" [disabled]="true" ></mat-checkbox>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="isActive">
+                  <mat-header-cell *matHeaderCellDef> Active </mat-header-cell>
+                  <mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.isActive" [disabled]="true" ></mat-checkbox>
+                  </mat-cell>
+                </ng-container>
+  
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <button mat-icon-button (click)="editItemCategory(element)" 
+                      matTooltip="Click to edit this data">
+                      <mat-icon class="edit-icon">edit</mat-icon>
+                    </button>
+                    <!-- <button mat-icon-button (click)="deleteItemCategory(element.id, element)"
+                      matTooltip="Click to delete this data">
+                      <mat-icon class="delete-icon">delete</mat-icon>
+                    </button> -->
+                  </mat-cell>
+                </ng-container>
+  
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+  
+              <mat-paginator  [length]="object?.count"
+                              [pageSizeOptions]="[5, 10, 20]"
+                              (page)="pageEvent = $event; onPaginateChange($event)"
+                              showFirstLastButtons>
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="alert alert-success" role="alert" *ngIf="alertTae === 'save'">
+        {{alertMsg}} 
+      </div> -->
+  </div>
+  
+  

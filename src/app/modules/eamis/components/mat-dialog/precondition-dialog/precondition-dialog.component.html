@@ -1,0 +1,41 @@
+<div class="body container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <h4 mat-dialog-title *ngIf="actionBtn === 'Save' else elseUpdate">Pre-conditions</h4>
+                <ng-template #elseUpdate>
+                    <h4 mat-dialog-title>Pre-conditions</h4>
+                </ng-template>
+                <mat-icon mat-dialog-close click>close</mat-icon>
+            </div>
+            <mat-dialog-content>
+                <form [formGroup]="preconditionsForm">
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline" [hidden]="true">
+                        <mat-label>Id</mat-label>
+                        <input matInput type="text" formControlName="id">
+                    </mat-form-field>
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline"  [hidden]="true">
+                        <mat-label>Parent Id</mat-label>
+                        <input matInput type="text" formControlName="parent_Id">
+                    </mat-form-field>
+                    <mat-form-field class="full-width" floatLabel="always">
+                        <mat-label>Pre-conditions Description</mat-label>
+                        <input matInput type="text" formControlName="precondition_Description" cdkFocusInitial>
+                        <mat-error *ngIf="preconditionsForm.invalid">{{getPreconditionDescErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <div class="d-flex flex-row-reverse button-row">
+                        <button mat-raised-button color="warn" class="button" (click)="clearPreconditions()">
+                            <mat-icon>clear_all</mat-icon>Clear</button>
+                        <button mat-raised-button color="primary" class="button" (click)="addPreconditions()" [disabled]="preconditionsForm.invalid">
+                            <mat-icon>check_circle_outline</mat-icon>
+                            {{actionBtn}}
+                            </button>
+                    </div>
+                </form>
+            </mat-dialog-content>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,39 @@
+<div class="body container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <h4 mat-dialog-title *ngIf="actionBtn === 'Save' else elseUpdate">Unit of Measurement</h4>
+                <ng-template #elseUpdate>
+                    <h4 mat-dialog-title>Stockroom</h4>
+                </ng-template>
+                <mat-icon mat-dialog-close click>close</mat-icon>
+            </div>
+            <mat-dialog-content>
+                <form [formGroup]="unitMeasureForm">
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline" [hidden]="true">
+                        <mat-label>Id</mat-label>
+                        <input matInput type="text" formControlName="id">
+                    </mat-form-field>
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <mat-label>Uom Short Description</mat-label>
+                        <input matInput type="text" formControlName="short_Description" cdkFocusInitial>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" floatLabel="always" appearance="outline">
+                        <mat-label>Uom Description</mat-label>
+                        <input matInput type="text" formControlName="uom_Description" cdkFocusInitial>
+                    </mat-form-field>
+                    <div class="d-flex flex-row-reverse button-row">
+                        <button mat-raised-button color="warn" class="button" (click)="clearUnitMeasure()">
+                            <mat-icon>clear_all</mat-icon>Clear</button>
+                        <button mat-raised-button color="primary" class="button" (click)="addUnitMeasure()" [disabled]="unitMeasureForm.invalid">
+                            <mat-icon>check_circle_outline</mat-icon>
+                            {{actionBtn}}
+                        </button>
+                    </div>
+                </form>
+            </mat-dialog-content>
+        </div>
+
+    </div>
+
+</div>
